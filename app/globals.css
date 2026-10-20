@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  font-family: var(--font-sans), sans-serif;
+  background-color: #FAF7F2;
+}
+
+/* Remover setas de incremento/decremento dos campos numéricos */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  display: none !important;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield !important;
+}
+
+/* Garantir que funciona em todos os navegadores */
+input[type="number"]:hover::-webkit-inner-spin-button,
+input[type="number"]:focus::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* Transições suaves entre páginas */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms ease-in-out, transform 250ms ease-in-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+/* Ocultar indicador de desenvolvimento do Next.js - CSS agressivo */
+*[data-nextjs-dialog],
+*[data-nextjs-toast],
+*[data-nextjs-router],
+*[data-nextjs-dialog-overlay],
+*[data-nextjs-toast-container],
+iframe[src*="__nextjs"],
+iframe[src*="nextjs"],
+body > div:last-child[style*="position: fixed"],
+body > div[style*="z-index"][style*="9999"],
+body > div[style*="z-index"][style*="10000"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ocultar qualquer elemento fixo no canto inferior direito que contenha apenas "N" */
+body > div[style*="position: fixed"][style*="bottom: 0"],
+body > div[style*="position: fixed"][style*="right: 0"] {
+  display: none !important;
+}

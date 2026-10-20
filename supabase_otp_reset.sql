@@ -1,0 +1,34 @@
+-- =============================================================================
+-- RECUPERAÇÃO DE SENHA COM CÓDIGO OTP (Lucrou)
+-- =============================================================================
+--
+-- PROBLEMA: Se o email chega com "Magic Link" / "Log In", o template Supabase
+-- ainda está a enviar link em vez de código numérico.
+--
+-- SOLUÇÃO A (recomendada, automática):
+--   npm run configurar:otp
+--   Requer SUPABASE_ACCESS_TOKEN no .env.local
+--   (criar em https://supabase.com/dashboard/account/tokens)
+--
+-- SOLUÇÃO B (manual no Dashboard):
+--   Supabase → Authentication → Email Templates → "Reset password"
+--   Assunto: Lucrou — Código para recuperar senha
+--   Corpo (HTML):
+--
+--   <h2>Recuperar senha — Lucrou</h2>
+--   <p>Usa este código na app para definir uma nova senha:</p>
+--   <p style="font-size:28px;font-weight:bold;letter-spacing:4px;color:#1B5E3B;">{{ .Token }}</p>
+--   <p style="color:#666;font-size:14px;">O código é de uso único e expira em 24 horas.</p>
+--
+--   IMPORTANTE: usar {{ .Token }} e NÃO {{ .ConfirmationURL }}
+--
+-- SOLUÇÃO C (envio próprio via Resend — não depende do template Supabase):
+--   Variáveis na Vercel / .env.local:
+--     RESEND_API_KEY=re_...
+--     EMAIL_FROM=Lucrou <noreply@teu-dominio.com>
+--
+-- EXPIRAÇÃO OTP (24 horas):
+--   Dashboard → Authentication → Providers → Email → Email OTP Expiration
+--   Definir: 86400 segundos
+--
+-- O código é de uso único: após redefinir a senha, não pode ser reutilizado.
